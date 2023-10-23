@@ -23,6 +23,7 @@ func main() {
 			hangman, status = ReadFile("content/hangman.txt")
 			if status {
 				wordsNb = wordsNb - 1
+				CheckFolder()
 				HangmanInit(hangman, words, wordsNb)
 			}
 		}

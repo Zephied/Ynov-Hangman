@@ -42,6 +42,10 @@ func HangmanInterface(hangman []byte, word string, hiddenWord string, life int, 
 					if life == 0 {
 						fmt.Println("You lost!")
 						fmt.Println("The word was:", word)
+						if os.Args[1] == "--startWith" {
+							os.Remove(os.Args[2])
+						}
+						os.Exit(0)
 					} else {
 						fmt.Println("You have", life, "attempts left.")
 					}

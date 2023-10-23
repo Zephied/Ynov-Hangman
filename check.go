@@ -76,3 +76,9 @@ func CheckUsedLetters(letterUsed *[]string, choice string) bool {
 	*letterUsed = append(*letterUsed, choice)
 	return true
 }
+
+func CheckFolder() {
+	if _, err := os.Stat("save"); os.IsNotExist(err) {
+		os.Mkdir("save", 0755)
+	}
+}
