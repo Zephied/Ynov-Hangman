@@ -9,7 +9,6 @@ func HangmanInterface(hangman []byte, word string, hiddenWord string, life int, 
 	var state1, state2 int
 	var status bool
 	var choice string
-	var empty []byte
 
 	fmt.Println("Good luck, you have", life, "attempts.")
 	fmt.Println(hiddenWord)
@@ -26,7 +25,9 @@ func HangmanInterface(hangman []byte, word string, hiddenWord string, life int, 
 				fmt.Println(hiddenWord)
 				if hiddenWord == word {
 					fmt.Println("You won!")
-					os.WriteFile("save.txt", empty, 0644)
+					if os.Args[1] == "--startWith" {
+						os.Remove(os.Args[2])
+					}
 					os.Exit(0)
 				}
 			} else {
