@@ -13,6 +13,9 @@ func main() {
 	var hangman []byte
 
 	if CheckArgs() {
+		if os.Args[1] == "--startWith" {
+			Load()
+		}
 		filename := os.Args[1]
 		wordlist, status = ReadFile(filename)
 		if status {
@@ -20,7 +23,7 @@ func main() {
 			hangman, status = ReadFile("content/hangman.txt")
 			if status {
 				wordsNb = wordsNb - 1
-				HangmanInterface(hangman, words, wordsNb)
+				HangmanInit(hangman, words, wordsNb)
 			}
 		}
 	}
