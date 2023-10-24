@@ -5,25 +5,30 @@ import (
 	"os"
 )
 
-func HangmanInterface(hangman []byte, word string, hiddenWord string, life int, letterUsed []string, save bool) {
+func HangmanInterface(hangman []byte, data *Data, save bool) {
 	var state1, state2 int
 	var status bool
 	var choice string
 
-	fmt.Println("Good luck, you have", life, "attempts.")
-	fmt.Println(hiddenWord)
-	for life > 0 {
+	fmt.Println("Good luck, you have", data.Life, "attempts.")
+	fmt.Println(data.HiddenWord)
+	for data.Life > 0 {
 		fmt.Print("Choose:")
 		fmt.Scan(&choice)
 		if choice == "STOP" {
-			Save(word, hiddenWord, life, letterUsed)
+			Save(data)
 		}
-		status = CheckUsedLetters(&letterUsed, choice)
+		status = CheckUsedLetters(&data.LetterUsed, choice)
 		if status {
-			hiddenWord, status = CheckLetter(word, hiddenWord, choice)
+			data.HiddenWord, status = CheckLetter(data, choice)
 			if status {
-				fmt.Println(hiddenWord)
-				if hiddenWord == word {
+				if !data.Ascii {
+					fmt.Println(data.HiddenWord)
+				} else {
+					AsciiArtDisplay(data)
+
+				}
+				if data.HiddenWord == data.Word {
 					fmt.Println("You won!")
 					if os.Args[1] == "--startWith" {
 						os.Remove(os.Args[2])
@@ -32,22 +37,22 @@ func HangmanInterface(hangman []byte, word string, hiddenWord string, life int, 
 				}
 			} else {
 				if len(choice) > 1 {
-					life = life - 2
+					data.Life = data.Life - 2
 				} else {
-					life--
+					data.Life--
 				}
-				state1, state2, status = HangmanStats(life)
+				state1, state2, status = HangmanStats(data.Life)
 				if status {
 					PrintHangman(state1, state2, hangman)
-					if life == 0 {
+					if data.Life == 0 {
 						fmt.Println("You lost!")
-						fmt.Println("The word was:", word)
+						fmt.Println("The word was:", data.Word)
 						if os.Args[1] == "--startWith" {
 							os.Remove(os.Args[2])
 						}
 						os.Exit(0)
 					} else {
-						fmt.Println("You have", life, "attempts left.")
+						fmt.Println("You have", data.Life, "attempts left.")
 					}
 				}
 			}
@@ -55,14 +60,16 @@ func HangmanInterface(hangman []byte, word string, hiddenWord string, life int, 
 	}
 }
 
-func HangmanInit(hangman []byte, words []string, wordsNb int) {
-	life := 10
-	var letterUsed []string
-	var save bool = false
+func HangmanInit(hangman []byte, words []string, wordsNb int, data *Data) {
+	data.Life = 10
+	data.LetterUsed = []string{}
 
-	word := RandomWord(words, wordsNb)
-	hiddenWord, letter := HideWord(word)
-	hiddenWord = Hint(hiddenWord, word, letter)
+	var letter int
 
-	HangmanInterface(hangman, word, hiddenWord, life, letterUsed, save)
+	save := false
+	data.Word = RandomWord(words, wordsNb)
+	data.HiddenWord, letter = HideWord(data.Word)
+	data.HiddenWord, data.LetterUsed = Hint(data, letter)
+
+	HangmanInterface(hangman, data, save)
 }

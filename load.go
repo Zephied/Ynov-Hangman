@@ -13,9 +13,9 @@ func Load() {
 	if status {
 		hangman, status := ReadFile("content/hangman.txt")
 		if status {
-			var save SaveStruct
-			json.Unmarshal(stats, &save)
-			HangmanInterface(hangman, save.Word, save.HiddenWord, save.Life, save.LetterUsed, saved)
+			var data Data
+			json.Unmarshal(stats, &data)
+			HangmanInterface(hangman, &data, saved)
 		}
 	}
 }

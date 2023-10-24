@@ -12,9 +12,22 @@ func main() {
 	var wordsNb int
 	var hangman []byte
 
+	var data Data
+
+	data.Ascii = false
 	if CheckArgs() {
 		if os.Args[1] == "--startWith" {
 			Load()
+		}
+		if os.Args[1] == "--help" {
+			Help()
+			os.Exit(0)
+		}
+		if len(os.Args) > 2 {
+			if os.Args[2] == "--ascii" {
+				data.Ascii = true
+				data.AsciiFile = os.Args[3]
+			}
 		}
 		filename := os.Args[1]
 		wordlist, status = ReadFile(filename)
@@ -24,7 +37,7 @@ func main() {
 			if status {
 				wordsNb = wordsNb - 1
 				CheckFolder()
-				HangmanInit(hangman, words, wordsNb)
+				HangmanInit(hangman, words, wordsNb, &data)
 			}
 		}
 	}

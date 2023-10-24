@@ -6,9 +6,9 @@ import (
 	"os"
 )
 
-func Save(word string, hiddenWord string, life int, letterUsed []string) {
+func Save(data *Data) {
 	var name string
-	b, err := json.Marshal(SaveStruct{word, hiddenWord, life, letterUsed})
+	b, err := json.Marshal(data)
 	if CheckSave(err) {
 		fmt.Print("choose a name for your save: ")
 		fmt.Scanln(&name)
