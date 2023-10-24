@@ -11,7 +11,11 @@ func HangmanInterface(hangman []byte, data *Data, save bool) {
 	var choice string
 
 	fmt.Println("Good luck, you have", data.Life, "attempts.")
-	fmt.Println(data.HiddenWord)
+	if data.Ascii {
+		AsciiArtDisplay(data)
+	} else {
+		fmt.Println(data.HiddenWord)
+	}
 	for data.Life > 0 {
 		fmt.Print("Choose:")
 		fmt.Scan(&choice)
