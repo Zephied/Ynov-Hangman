@@ -1,7 +1,8 @@
-package hangmanclassic
+package init
 
 import (
 	"encoding/json"
+	structs "hangman_classic/structs"
 	"os"
 )
 
@@ -13,7 +14,7 @@ func Load() {
 	if status {
 		hangman, status := ReadFile("content/hangman.txt")
 		if status {
-			var data Data
+			var data structs.Data
 			json.Unmarshal(stats, &data)
 			HangmanInterface(hangman, &data, saved)
 		}

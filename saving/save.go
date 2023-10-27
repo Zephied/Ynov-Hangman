@@ -1,8 +1,10 @@
-package hangmanclassic
+package saving
 
 import (
 	"encoding/json"
 	"fmt"
+	. "hangman_classic/checks"
+	. "hangman_classic/structs"
 	"os"
 )
 

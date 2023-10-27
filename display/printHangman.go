@@ -1,4 +1,4 @@
-package hangmanclassic
+package display
 
 import "fmt"
 

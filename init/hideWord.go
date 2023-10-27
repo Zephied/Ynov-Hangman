@@ -1,4 +1,4 @@
-package hangmanclassic
+package init
 
 func HideWord(word string) (string, int) {
 	var hiddenWord string

@@ -1,7 +1,10 @@
 package main
 
 import (
-	. "hangman_classic"
+	. "hangman_classic/checks"
+	. "hangman_classic/display"
+	. "hangman_classic/init"
+	. "hangman_classic/structs"
 	"os"
 )
 
@@ -23,11 +26,9 @@ func main() {
 			Help()
 			os.Exit(0)
 		}
-		if len(os.Args) > 2 {
-			if os.Args[2] == "--ascii" {
-				data.Ascii = true
-				data.AsciiFile = os.Args[3]
-			}
+		if len(os.Args) > 2 && len(os.Args) < 4 {
+			data.Ascii = true
+			data.AsciiFile = os.Args[2]
 		}
 		filename := os.Args[1]
 		wordlist, status = ReadFile(filename)

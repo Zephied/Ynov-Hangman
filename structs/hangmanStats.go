@@ -1,4 +1,4 @@
-package hangmanclassic
+package structs
 
 func HangmanStats(life int) (int, int, bool) {
 	var start int
