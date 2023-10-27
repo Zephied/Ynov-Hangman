@@ -3,11 +3,11 @@ package display
 import (
 	"bufio"
 	"fmt"
-	. "hangman_classic/structs"
+	structs "hangman_classic/structs"
 	"strings"
 )
 
-func PrintInAscii(data *Data, asciiArt []string, chars []byte) {
+func PrintInAscii(data *structs.Data, asciiArt []string, chars []byte) {
 
 	var j int
 	asciifiedWord := make([]string, 8)
@@ -31,5 +31,4 @@ func PrintInAscii(data *Data, asciiArt []string, chars []byte) {
 	for i := 0; i < len(asciifiedWord); i++ {
 		fmt.Println(asciifiedWord[i])
 	}
-	fmt.Println(string(data.HiddenWord))
 }
