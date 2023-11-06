@@ -3,15 +3,15 @@ package saving
 import (
 	"encoding/json"
 	"fmt"
-	. "hangman_classic/checks"
-	. "hangman_classic/structs"
+	checks "hangman_classic/checks"
+	structs "hangman_classic/structs"
 	"os"
 )
 
-func Save(data *Data) {
+func Save(data *structs.Data) {
 	var name string
 	b, err := json.Marshal(data)
-	if CheckSave(err) {
+	if checks.CheckSave(err) {
 		fmt.Print("choose a name for your save: ")
 		fmt.Scanln(&name)
 		name = "save/" + name + ".txt"
