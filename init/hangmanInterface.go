@@ -16,14 +16,15 @@ func HangmanInterface(hangman []byte, data *structs.Data, save bool) {
 	var asciiArt []string
 	var chars []byte = []byte{' ', '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '=', '>', '?', '@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', '\\', ']', '^', '_', '`', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '|', '}', '~'}
 
-	fmt.Println("Good luck, you have", data.Life, "attempts.")
+	fmt.Print("Good luck, you have ", data.Life, " attempts.\n\n")
 	if data.Ascii {
 		asciiArt = InitAsciiArt(data)
 		display.PrintInAscii(data, asciiArt, chars)
 	} else {
-		fmt.Println(data.HiddenWord)
+		fmt.Println("Word:", data.HiddenWord)
 	}
 	for data.Life > 0 {
+		fmt.Print("\nUsed letters:", data.LetterUsed, "\n\n")
 		fmt.Print("Choose:")
 		fmt.Scan(&choice)
 		if choice == "STOP" {
@@ -53,6 +54,7 @@ func HangmanInterface(hangman []byte, data *structs.Data, save bool) {
 				}
 				state1, state2, status = structs.HangmanStats(data.Life)
 				if status {
+					fmt.Println(choice, ": wrong letter, try again")
 					display.PrintHangman(state1, state2, hangman)
 					if data.Ascii {
 						display.PrintInAscii(data, asciiArt, chars)
