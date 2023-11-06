@@ -54,6 +54,11 @@ func HangmanInterface(hangman []byte, data *structs.Data, save bool) {
 				state1, state2, status = structs.HangmanStats(data.Life)
 				if status {
 					display.PrintHangman(state1, state2, hangman)
+					if data.Ascii {
+						display.PrintInAscii(data, asciiArt, chars)
+					} else {
+						fmt.Println(data.HiddenWord)
+					}
 					if data.Life == 0 {
 						fmt.Println("You lost!")
 						fmt.Println("The word was:", data.Word)

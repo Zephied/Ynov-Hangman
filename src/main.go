@@ -1,10 +1,10 @@
 package main
 
 import (
-	. "hangman_classic/checks"
-	. "hangman_classic/display"
-	. "hangman_classic/init"
-	. "hangman_classic/structs"
+	checks "hangman_classic/checks"
+	display "hangman_classic/display"
+	inite "hangman_classic/init"
+	structs "hangman_classic/structs"
 	"os"
 )
 
@@ -15,15 +15,15 @@ func main() {
 	var wordsNb int
 	var hangman []byte
 
-	var data Data
+	var data structs.Data
 
 	data.Ascii = false
-	if CheckArgs() {
+	if checks.CheckArgs() {
 		if os.Args[1] == "--startWith" {
-			Load()
+			inite.Load()
 		}
 		if os.Args[1] == "--help" {
-			Help()
+			display.Help()
 			os.Exit(0)
 		}
 		if len(os.Args) > 2 && len(os.Args) < 4 {
@@ -31,14 +31,14 @@ func main() {
 			data.AsciiFile = os.Args[2]
 		}
 		filename := os.Args[1]
-		wordlist, status = ReadFile(filename)
+		wordlist, status = inite.ReadFile(filename)
 		if status {
-			words, wordsNb = WordSlice(wordlist)
-			hangman, status = ReadFile("content/hangman.txt")
+			words, wordsNb = inite.WordSlice(wordlist)
+			hangman, status = inite.ReadFile("content/hangman.txt")
 			if status {
 				wordsNb = wordsNb - 1
-				CheckFolder()
-				HangmanInit(hangman, words, wordsNb, &data)
+				checks.CheckFolder()
+				inite.HangmanInit(hangman, words, wordsNb, &data)
 			}
 		}
 	}
