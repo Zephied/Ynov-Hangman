@@ -10,7 +10,7 @@ import (
 
 func Save(data *structs.Data, save bool) {
 	var name string
-	b, err := json.Marshal(data)
+	gameSave, err := json.Marshal(data)
 	if checks.CheckSave(err) {
 		if !save {
 			fmt.Print("choose a name for your save: ")
@@ -20,7 +20,7 @@ func Save(data *structs.Data, save bool) {
 		} else {
 			name = os.Args[2]
 		}
-		os.WriteFile(name, b, 0644)
+		os.WriteFile(name, gameSave, 0644)
 		fmt.Println("game saved in", name)
 		os.Exit(0)
 	}
