@@ -14,7 +14,7 @@ git clone https://ytrack.learn.ynov.com/git/ganicolas/hangman.git
 Navigate to the project directory and run the game with the following command:
     
  ```bash
-go run main.go [wordlist.txt] 
+go run src/main.go [wordlist.txt] 
 ```
 
 Replace [wordlist.txt] with the path to your word list file and you can add an [ascii.txt] to use the ascii art version of the game.
@@ -22,7 +22,7 @@ Replace [wordlist.txt] with the path to your word list file and you can add an [
 to load a saved game, run the following command:
 
 ```bash
-go run main.go [wordlist.txt] --startWith [savefile.json]
+go run src/main.go [wordlist.txt] --startWith [savefile.json]
 ```
 
 replace [savefile.json] with the path to your save file.
