@@ -28,7 +28,7 @@ func HangmanInterface(hangman []byte, data *structs.Data, save bool) {
 		fmt.Print("Choose:")
 		fmt.Scan(&choice)
 		if choice == "STOP" {
-			saving.Save(data)
+			saving.Save(data, save)
 		}
 		status = check.CheckUsedLetters(&data.LetterUsed, choice)
 		if status {

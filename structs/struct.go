@@ -8,3 +8,10 @@ type Data struct {
 	Ascii      bool
 	AsciiFile  string
 }
+
+type Inite struct {
+	Wordlist []byte
+	Words    []string
+	WordsNb  int
+	Status   bool
+}

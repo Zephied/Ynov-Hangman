@@ -8,14 +8,18 @@ import (
 	"os"
 )
 
-func Save(data *structs.Data) {
+func Save(data *structs.Data, save bool) {
 	var name string
 	b, err := json.Marshal(data)
 	if checks.CheckSave(err) {
-		fmt.Print("choose a name for your save: ")
-		fmt.Scanln(&name)
-		name = "save/" + name + ".txt"
-		os.Create(name)
+		if !save {
+			fmt.Print("choose a name for your save: ")
+			fmt.Scanln(&name)
+			name = "save/" + name + ".txt"
+			os.Create(name)
+		} else {
+			name = os.Args[2]
+		}
 		os.WriteFile(name, b, 0644)
 		fmt.Println("game saved in", name)
 		os.Exit(0)

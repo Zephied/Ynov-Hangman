@@ -3,24 +3,21 @@ package main
 import (
 	checks "hangman_classic/checks"
 	display "hangman_classic/display"
-	inite "hangman_classic/init"
+	initiate "hangman_classic/init"
 	structs "hangman_classic/structs"
 	"os"
 )
 
 func main() {
-	var wordlist []byte
-	var status bool
-	var words []string
-	var wordsNb int
 	var hangman []byte
 
 	var data structs.Data
+	var Inite structs.Inite
 
 	data.Ascii = false
 	if checks.CheckArgs() {
 		if os.Args[1] == "--startWith" {
-			inite.Load()
+			initiate.Load()
 		}
 		if os.Args[1] == "--help" {
 			display.Help()
@@ -31,14 +28,14 @@ func main() {
 			data.AsciiFile = os.Args[2]
 		}
 		filename := os.Args[1]
-		wordlist, status = inite.ReadFile(filename)
-		if status {
-			words, wordsNb = inite.WordSlice(wordlist)
-			hangman, status = inite.ReadFile("content/hangman.txt")
-			if status {
-				wordsNb = wordsNb - 1
+		Inite.Wordlist, Inite.Status = initiate.ReadFile(filename)
+		if Inite.Status {
+			Inite.Words, Inite.WordsNb = initiate.WordSlice(Inite.Wordlist)
+			hangman, Inite.Status = initiate.ReadFile("content/hangman.txt")
+			if Inite.Status {
+				Inite.WordsNb = Inite.WordsNb - 1
 				checks.CheckFolder()
-				inite.HangmanInit(hangman, words, wordsNb, &data)
+				initiate.HangmanInit(hangman, &Inite, &data)
 			}
 		}
 	}
