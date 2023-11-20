@@ -7,7 +7,7 @@ Hangman Classic is a text-based version of the classic word guessing game. The g
 Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/yourusername/hangman_classic.git
+git clone https://ytrack.learn.ynov.com/git/ganicolas/hangman.git
 ```
 
 ## Usage
